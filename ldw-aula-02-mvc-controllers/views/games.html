@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>  
+{% extends 'base.html' %}
+
+{% block content %}
     <h1>Essa é a página de games!</h1>
     <h3>Jogo em destaque:</h3>
     <ul>
@@ -17,10 +12,19 @@
 
     {# Esse é um comentario em jinja2 #}
 
-    <h3>Top players:</h3>
+    <h3>Está sendo jogado por:</h3>
     {% for player in players %}
             <li>{{player}}</li>
     {% endfor %}
+
+    <hr>
+    <ul>
+        <form action="{{url_for('games')}}" method="POST">
+            <label for="player">Jogador:</label>
+            <input type="text" name="player" class="form-control">
+            <input type="submit" value="Entrar" class="btn btn-success">
+        </form>
+    </ul>
 
     <h4>Console mais bem avaliado:</h4>
     {% for key, value in console.items() %}
@@ -29,7 +33,4 @@
         <p>{{value}}</p>
     </details>
     {% endfor %}
-
-
-</body>
-</html>
+{% endblock content%}
