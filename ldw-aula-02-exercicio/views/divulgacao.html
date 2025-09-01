@@ -1,0 +1,70 @@
+{% extends 'base.html' %} {% block content %}
+<wrapper class="bg">
+  <main class="main d-flex justify-content-between row" id="main-cadastro">
+    <h3 style="text-align: center; margin-bottom: 10%">
+      Bem vindo à Lumina care a marca número um do mercado
+    </h3>
+        <h4>Sobre a Lumina Care</h4>
+    <p class="text text-center text-break">
+      Há 4 anos, nasceu a Lumina Care, uma marca dedicada a transformar o
+      cuidado com a pele em um momento de bem-estar, confiança e consciência.
+      Desde o início, nosso propósito foi unir ciência, natureza e inovação para
+      oferecer produtos de skin care eficazes, seguros e sustentáveis. Nossa
+      história começou com a busca por fórmulas que realmente cuidassem da pele
+      sem agredir o meio ambiente. Acreditamos que beleza e responsabilidade
+      podem caminhar juntas. Por isso, cada produto é desenvolvido com
+      ingredientes selecionados, priorizando ativos de origem natural e
+      processos que respeitam o equilíbrio do planeta. Na Lumina Care, não
+      cuidamos apenas da pele, mas também do futuro. Nossos princípios estão
+      alinhados com a preservação ambiental: trabalhamos com embalagens
+      recicláveis, reduzimos resíduos em nossa cadeia produtiva e apoiamos
+      práticas conscientes que fortalecem a sustentabilidade. Com a confiança de
+      nossos clientes e parceiros, seguimos crescendo e inovando, mantendo vivo
+      o compromisso de iluminar sua pele e seu dia a dia com produtos que
+      refletem cuidado, qualidade e respeito à natureza.
+    <h4 style="margin-bottom: 3%">Destaques:</h4>
+    {% for image in images[5:8] %}
+    <div class="card d-flex align-items-center mx-5 mb-5" id="card-img">
+      <div class="image-card pb-3">
+        <img
+          src="{{ url_for('static', filename='images/' + image) }}"
+          alt="Imagem {{ loop.index }}"
+          width="200"
+        />
+      </div>
+      <ul>
+        <li>Nome: <strong>{{ console.name }}</strong></li>
+        <li>Ano de Fabricação: <strong>{{ year }}</strong></li>
+        <li>Descrição: <strong>{{ description }}</strong></li>
+      </ul>
+    </div>
+    {% endfor %}
+
+
+    </p>
+    {# Esse é um comentario em jinja2 #}
+
+    <h3>Nossos colaboradores:</h3>
+    {% for player in players %}
+    <li>{{player}}</li>
+    {% endfor %}
+
+    <hr />
+    <ul>
+      <form action="{{url_for('cadastro')}}" method="POST">
+        <label for="player">Jogador:</label>
+        <input type="text" name="player" class="form-control" />
+        <input type="submit" value="Entrar" class="btn btn-success" />
+      </form>
+    </ul>
+
+    <h4>Console mais bem avaliado:</h4>
+    {% for name in console %}
+
+    <details>
+      <summary>{{key}}</summary>
+      <p>{{value}}</p>
+    </details>
+  </main>
+</wrapper>
+{% endfor %} {% endblock content%}

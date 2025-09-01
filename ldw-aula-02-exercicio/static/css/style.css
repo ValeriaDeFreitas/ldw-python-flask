@@ -1,0 +1,57 @@
+
+/* Cores  */
+:root {
+  --color-one: #9376e0;
+  --color-two: #e893cf;
+  --color-three: #f3bcc8;
+  --cor-four: #f6ffa6;
+}
+/* Geral */
+.body {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+.bg {
+  background-color: #ffffff;
+  height: max-content;
+}
+/* Inicio  */
+#nav-bar {
+  color: #6a467e;
+}
+.image {
+  width: 99.2vw;
+}
+.img-fluid {
+  width: 99vw;
+  height: 90px;
+}
+#logo {
+  position: relative;
+  width: 220px;
+  height: 170px;
+}
+#links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#link{
+  color: var(--color-one);
+}
+#card-img{
+  width: 300px;
+  padding-top: 2%;
+  border-radius: 0%;
+  background-color: var(--cor-four);
+}
+
+@media (min-width: 768px) {
+  #nav-conteiner {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+  }
+}
