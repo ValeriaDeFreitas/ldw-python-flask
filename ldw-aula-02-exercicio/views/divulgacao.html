@@ -1,10 +1,13 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+
+{% block content %}
 <wrapper class="bg">
-  <main class="main d-flex justify-content-between row" id="main-cadastro">
+  <main class="main" id="main-cadastro">
     <h3 style="text-align: center; margin-bottom: 10%">
-      Bem vindo à Lumina care a marca número um do mercado
+      Bem-vindo à Lumina Care, a marca número um do mercado
     </h3>
-        <h4>Sobre a Lumina Care</h4>
+
+    <h4>Sobre a Lumina Care</h4>
     <p class="text text-center text-break">
       Há 4 anos, nasceu a Lumina Care, uma marca dedicada a transformar o
       cuidado com a pele em um momento de bem-estar, confiança e consciência.
@@ -22,49 +25,50 @@
       nossos clientes e parceiros, seguimos crescendo e inovando, mantendo vivo
       o compromisso de iluminar sua pele e seu dia a dia com produtos que
       refletem cuidado, qualidade e respeito à natureza.
-    <h4 style="margin-bottom: 3%">Destaques:</h4>
-    {% for image in images[5:8] %}
-    <div class="card d-flex align-items-center mx-5 mb-5" id="card-img">
+    </p>
+
+    <h4 style=" margin-bottom: 3%; ">Destaques:</h4>
+     {% for produtos in produtos %}
+    <div class="d-flex row">
+    <div class="card d-flex justify-content-between align-items-center mx-5 mb-5" id="card-img">
       <div class="image-card pb-3">
         <img
-          src="{{ url_for('static', filename='images/' + image) }}"
-          alt="Imagem {{ loop.index }}"
+          src="{{ url_for('static', filename='images/' ~produtos.image) }}"
+          alt="Imagem {{ produtos.image }}"
           width="200"
         />
+        </div>
+        <ul>
+          <li>Nome: <strong>{{ produtos.name }}</strong></li>
+          <li>Ano de Fabricação: <strong>{{ produtos.year }}</strong></li>
+          <li>Descrição: <strong>{{ produtos.description }}</strong></li>
+        </ul>
+          
       </div>
-      <ul>
-        <li>Nome: <strong>{{ console.name }}</strong></li>
-        <li>Ano de Fabricação: <strong>{{ year }}</strong></li>
-        <li>Descrição: <strong>{{ description }}</strong></li>
-      </ul>
+       {% endfor %}
     </div>
-    {% endfor %}
-
-
-    </p>
-    {# Esse é um comentario em jinja2 #}
 
     <h3>Nossos colaboradores:</h3>
-    {% for player in players %}
-    <li>{{player}}</li>
-    {% endfor %}
-
-    <hr />
     <ul>
-      <form action="{{url_for('cadastro')}}" method="POST">
-        <label for="player">Jogador:</label>
-        <input type="text" name="player" class="form-control" />
-        <input type="submit" value="Entrar" class="btn btn-success" />
-      </form>
+      {% for colaborador in colaboradores %}
+      <li>{{ colaborador }}</li>
+      {% endfor %}
     </ul>
+    <hr />
+    <form action="{{ url_for('cadastro') }}" method="POST" class="mb-3">
+      <label for="colaboradores">Cadastrar novos colaboradores:</label>
+      <input type="text" name="colaboradores" class="form-control" />
+      <input type="submit" value="Entrar" class="btn btn-success mt-2" />
+    </form>
 
     <h4>Console mais bem avaliado:</h4>
-    {% for name in console %}
-
+    {% for c in consoles %}
     <details>
-      <summary>{{key}}</summary>
-      <p>{{value}}</p>
+      <summary>{{ c.name }}</summary>
+      <p>Fabricante: {{ c.manufacturer }}</p>
+      <p>Ano: {{ c.year }}</p>
     </details>
+    {% endfor %}
   </main>
 </wrapper>
-{% endfor %} {% endblock content%}
+{% endblock %}
