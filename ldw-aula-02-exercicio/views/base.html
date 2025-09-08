@@ -18,7 +18,24 @@
     <header>
         <h1 style="text-align: center;">Lumina</h1>
     </header>
-    {% extends 'navbar.html' %}
+     <ul class="nav" id="nav-conteiner">
+      <li class="nav-item">
+        <img
+          src="{{ url_for('static', filename='images/img3.png') }}"
+          class="img-fluid pe-5"
+          id="logo"
+          alt="..."
+        />
+      </li>
+      <div id="links">
+        <li class="nav-item">
+          <a class="nav-link" id="link" href="/divulgacao">divulgação</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="link" href="{{url_for('cadastro')}}">cadastro</a>
+        </li>
+      </div>
+    </ul>
     {% block content %}
     <!-- Aqui irá o conteúdo -->
     {% endblock content %}

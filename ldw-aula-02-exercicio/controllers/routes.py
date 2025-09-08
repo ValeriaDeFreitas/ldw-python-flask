@@ -3,10 +3,11 @@ from flask import render_template, request, redirect, url_for
 
 def init_app(app):
     # Lista de jogadores
-    colaboradores = ['Ana Clara', 'Lucas Silva', 'Mariana Costa', 'Rafael Souza']
+    patrocinadores = ['Ana Clara', 'Lucas Silva', 'Mariana Costa', 'Rafael Souza']
+
+    products =[{'Nome' : 'HydraGlow Creme Facial', 'Ano' : 2023, 'Descricao' : 'Um creme hidratante leve de rápida absorção, desenvolvido com ácido hialurônico e extrato de camomila, que promove hidratação profunda e duradoura enquanto acalma a pele, deixando-a macia e luminosa.'}]
     
-    # Lista de jogos (como dicionários)
-    list = [{'Nome': 'CS 1.6', 'Ano': 1996, 'Descricao': 'FPS Online'}]
+    
 
     # Rota principal
     @app.route('/')
@@ -27,31 +28,21 @@ def init_app(app):
             {"name": "Ácido Esfoliante Lumina Clear", "year": 2023, "description": "Ajuda a renovar a pele, desobstruindo poros e uniformizando o tom, deixando a pele mais suave e radiante.", "image":"img8.jpg"}
         ]
 
-        # Lista de consoles (se quiser exibir também)
-        consoles = [
-            {"name": "Playstation 5", "manufacturer": "Sony", "year": 2020},
-            {"name": "Xbox Series X", "manufacturer": "Microsoft", "year": 2020},
-            {"name": "Nintendo Switch", "manufacturer": "Nintendo", "year": 2017}
-        ]
-
         # Se for requisição POST, adiciona jogador
         if request.method == 'POST':
             new_player = request.form.get('player')
             if new_player:
-                colaboradores.append(new_player)
+                patrocinadores.append(new_player)
                 return redirect(url_for('divulgacao'))
 
         # Renderiza a página
         return render_template(
             'divulgacao.html',
-            colaboradores=colaboradores,
+            patrocinadores=patrocinadores,
             produtos=produtos,       # passa lista de jogos
-            consoles=consoles, # passa lista de consoles
             images=image_files,
-            list=list
-        )
+            products=products)
 
-    # Rota de cadastro de jogos
     @app.route('/cadastro', methods=['GET', 'POST'])
     def cadastro():
         if request.method == 'POST':
@@ -59,12 +50,8 @@ def init_app(app):
             year = request.form.get('year')
             description = request.form.get('description')
 
-            if name and year and description:
-                list.append({
-                    'Nome': name,
-                    'Ano': int(year),
-                    'Descricao': description
-                })
-                return redirect(url_for('cadastro'))
-
-        return render_template('cadastro.html', list=list)
+        if request.form.get('name') and request.form.get('year') and request.form.get('description'):
+                    products.append({'Nome' : request.form.get('name'), 'Ano' : request.form.get('year'),
+                    'Descricao' : request.form.get('description')})
+                    return redirect(url_for('cadastro'))
+        return render_template('cadastro.html', products=products)

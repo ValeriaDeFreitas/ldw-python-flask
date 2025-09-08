@@ -4,14 +4,14 @@
   --color-one: #9376e0;
   --color-two: #e893cf;
   --color-three: #f3bcc8;
-  --cor-four: #f6ffa6;
+  --color-four: #f6ffa6;
 }
 /* Geral */
 .body {
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
   font-weight: 300;
-  font-style: normal;
+  font-style: normal
 }
 .bg {
   background-color: #ffffff;
@@ -42,17 +42,33 @@
   color: var(--color-one);
 }
 #card-img{
-  width: 300px;
+  width: 400px;
   padding-top: 2%;
   border-radius: 0%;
-  background-color: var(--cor-four);
+  background-color: var(--color-four);
 }
-
+#button{
+  background-color: var(--color-four);
+}
+#input{
+  width: 600px;
+}
+#form-bg{
+  background-color: var(--color-one);
+  color: #ffffff;
+  width: 1000px;
+  margin-bottom: 10%;
+  padding: 3%;
+}
+/* #tabela{
+  background-color: var(--color-three);
+  color: black;
+  height: auto;
+} */
 @media (min-width: 768px) {
   #nav-conteiner {
     background-color: #ffffff;
     display: flex;
     justify-content: space-between;
-    
   }
 }

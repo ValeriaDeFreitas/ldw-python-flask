@@ -1,13 +1,11 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <wrapper class="bg">
   <main class="main" id="main-cadastro">
     <h3 style="text-align: center; margin-bottom: 10%">
       Bem-vindo à Lumina Care, a marca número um do mercado
     </h3>
 
-    <h4>Sobre a Lumina Care</h4>
+    <h4 style="text-align: center; margin-bottom: 1%">Sobre a Lumina Care</h4>
     <p class="text text-center text-break">
       Há 4 anos, nasceu a Lumina Care, uma marca dedicada a transformar o
       cuidado com a pele em um momento de bem-estar, confiança e consciência.
@@ -27,48 +25,43 @@
       refletem cuidado, qualidade e respeito à natureza.
     </p>
 
-    <h4 style=" margin-bottom: 3%; ">Destaques:</h4>
-     {% for produtos in produtos %}
-    <div class="d-flex row">
-    <div class="card d-flex justify-content-between align-items-center mx-5 mb-5" id="card-img">
-      <div class="image-card pb-3">
-        <img
-          src="{{ url_for('static', filename='images/' ~produtos.image) }}"
-          alt="Imagem {{ produtos.image }}"
-          width="200"
-        />
+    <h4 style="margin-bottom: 3%">Destaques:</h4>
+
+    <!-- Contêiner flex para alinhar os cards lado a lado -->
+    <div class="d-flex flex-wrap justify-content-between ">
+      {% for produtos in produtos %}
+      <div
+        class="card mx-3 mb-4"
+        id="card-img"
+      >
+        <div class="image-card pb-3 text-center">
+          <img
+            src="{{ url_for('static', filename='images/' ~produtos.image) }}"
+            alt="Imagem {{ produtos.image }}"
+            width="200"
+          />
         </div>
         <ul>
           <li>Nome: <strong>{{ produtos.name }}</strong></li>
           <li>Ano de Fabricação: <strong>{{ produtos.year }}</strong></li>
           <li>Descrição: <strong>{{ produtos.description }}</strong></li>
         </ul>
-          
       </div>
-       {% endfor %}
+      {% endfor %}
     </div>
 
-    <h3>Nossos colaboradores:</h3>
+    <h3>Patrocinadores:</h3>
     <ul>
-      {% for colaborador in colaboradores %}
-      <li>{{ colaborador }}</li>
+      {% for patrocinador in patrocinadores %}
+      <li>{{ patrocinador }}</li>
       {% endfor %}
     </ul>
     <hr />
-    <form action="{{ url_for('cadastro') }}" method="POST" class="mb-3">
-      <label for="colaboradores">Cadastrar novos colaboradores:</label>
-      <input type="text" name="colaboradores" class="form-control" />
-      <input type="submit" value="Entrar" class="btn btn-success mt-2" />
+    <form action="{{ url_for('cadastro') }}" method="POST" class=" d-flex justify-content-start">
+      <label for="patrocinadores" class="mb-5 ms-5">Cadastrar novos Patrocinadores:</label>
+      <input type="text" name="patrocinadores" class="form-control mt-5 mb-5" id="input" />
+      <input type="submit" value="Cadastrar" class="btn mt-5 mb-5" id="button"/>
     </form>
-
-    <h4>Console mais bem avaliado:</h4>
-    {% for c in consoles %}
-    <details>
-      <summary>{{ c.name }}</summary>
-      <p>Fabricante: {{ c.manufacturer }}</p>
-      <p>Ano: {{ c.year }}</p>
-    </details>
-    {% endfor %}
   </main>
 </wrapper>
-{% endblock %}
+{% endblock content %}
