@@ -18,7 +18,7 @@ routes.init_app(app)
 dir = os.path.abspath(os.path.dirname(__file__))
 
 # Criando o arquivo do banco
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' +  os.path.join(dir, 'models/games.py')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' +  os.path.join(dir, 'models/games.sqlite3')
 
 if __name__ == '__main__':
     # Enviando flask para o sqlachemy
