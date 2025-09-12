@@ -49,6 +49,7 @@
 }
 #button{
   background-color: var(--color-four);
+  color: #000;
 }
 #input{
   width: 600px;

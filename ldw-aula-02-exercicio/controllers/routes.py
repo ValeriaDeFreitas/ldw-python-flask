@@ -30,9 +30,9 @@ def init_app(app):
 
         # Se for requisição POST, adiciona jogador
         if request.method == 'POST':
-            new_player = request.form.get('player')
-            if new_player:
-                patrocinadores.append(new_player)
+            new_patrocinador = request.form.get('patrocinadores')
+            if new_patrocinador:
+                patrocinadores.append(new_patrocinador)
                 return redirect(url_for('divulgacao'))
 
         # Renderiza a página
@@ -46,12 +46,12 @@ def init_app(app):
     @app.route('/cadastro', methods=['GET', 'POST'])
     def cadastro():
         if request.method == 'POST':
-            name = request.form.get('name')
-            year = request.form.get('year')
-            description = request.form.get('description')
 
-        if request.form.get('name') and request.form.get('year') and request.form.get('description'):
+            if request.form.get('name') and request.form.get('year') and request.form.get('description'):
                     products.append({'Nome' : request.form.get('name'), 'Ano' : request.form.get('year'),
                     'Descricao' : request.form.get('description')})
                     return redirect(url_for('cadastro'))
         return render_template('cadastro.html', products=products)
+    
+
+

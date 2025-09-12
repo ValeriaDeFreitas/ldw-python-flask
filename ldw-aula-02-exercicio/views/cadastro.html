@@ -1,57 +1,76 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% block content %}
 <h3>Cadastro de Produtos</h3>
 
 <wrapper class="bg">
   <main class="main d-flex justify-content-center row p-5" id="main-cadastro">
     <div class="card" id="form-bg">
       <form action="{{url_for('cadastro')}}" method="POST" id="form">
+        
+        <!-- Nome -->
         <div class="mb-3">
           <label for="nome" class="form-label">Nome:</label>
           <input
-            type="name"
+            type="text"
             class="form-control"
-            id="exampleFormControlInput1"
-            placeholder="digite o nome do seu produto"
+            id="nome"
+            name="name"
+            placeholder="Digite o nome do seu produto"
+            required
           />
         </div>
-        <label for="ano" class="form-label">Ano de Fabricação:</label>
-        <input
-          type="year"
-          class="form-control".Nom
-          id="exampleFormControlInput2"
-          placeholder="digite o ano de fabricação"
-        />
+        
+        <!-- Ano -->
+        <div class="mb-3">
+          <label for="ano" class="form-label">Ano de Fabricação:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="ano"
+            name="year"
+            placeholder="Digite o ano de fabricação"
+            required
+          />
+        </div>
+        
+        <!-- Descrição -->
         <div class="mb-3">
           <label for="descricao" class="form-label">Descrição:</label>
           <textarea
             class="form-control"
-            id="exampleFormControlTextarea1"
+            id="descricao"
+            name="description"
             rows="3"
+            required
           ></textarea>
         </div>
-        <input type="submit" class="btn" value="Cadastrar" id="button" />
+        
+        <!-- Botão -->
+        <input type="submit" class="btn btn-primary" value="Cadastrar" id="button" />
       </form>
     </div>
 
     <br />
-    
+
+    <!-- Tabela de Produtos -->
     <table class="table table-striped" id="tabela">
       <thead>
-        <th>Nome:</th>
-        <th>Ano de Fabricação:</th>
-        <th>Descrição:</th>
-      </thead>
-      {% for products in products %}
-      <tbody>
         <tr>
-          <td>{{products.Nome}}</td>
-          <td>{{products.Ano}}</td>
-          <td>{{products.Descricao [:10] }}</td>
+          <th>Nome</th>
+          <th>Ano de Fabricação</th>
+          <th>Descrição</th>
         </tr>
+      </thead>
+      <tbody>
+        {% for produto in products %}
+        <tr>
+          <td>{{ produto.Nome }}</td>
+          <td>{{ produto.Ano }}</td>
+          <td>{{ produto.Descricao[:50] }}...</td>
+        </tr>
+        {% endfor %}
       </tbody>
-      {% endfor %}
     </table>
   </main>
 </wrapper>
-<!-- {{gamelist}} -->
 {% endblock content %}

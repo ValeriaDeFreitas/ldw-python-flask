@@ -50,14 +50,16 @@
       {% endfor %}
     </div>
 
-    <h3>Patrocinadores:</h3>
+   <h3>Patrocinadores:</h3>
     <ul>
       {% for patrocinador in patrocinadores %}
       <li>{{ patrocinador }}</li>
       {% endfor %}
     </ul>
     <hr />
-    <form action="{{ url_for('cadastro') }}" method="POST" class=" d-flex justify-content-start">
+
+    <!-- Form de cadastro de patrocinadores -->
+    <form action="{{ url_for('divulgacao') }}" method="POST" class="d-flex justify-content-start">
       <label for="patrocinadores" class="mb-5 ms-5">Cadastrar novos Patrocinadores:</label>
       <input type="text" name="patrocinadores" class="form-control mt-5 mb-5" id="input" />
       <input type="submit" value="Cadastrar" class="btn mt-5 mb-5" id="button"/>
