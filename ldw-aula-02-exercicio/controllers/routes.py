@@ -1,5 +1,8 @@
 import os
 from flask import render_template, request, redirect, url_for
+import urllib  # Envia requisições a uma url
+import json  # Faz a conversão de dados json -> dicionário
+from models.database import Lumina, db
 
 def init_app(app):
     # Lista de jogadores
@@ -53,5 +56,27 @@ def init_app(app):
                     return redirect(url_for('cadastro'))
         return render_template('cadastro.html', products=products)
     
+    @app.route('/api', methods=['GET', 'POST'])
+    # Criando parâmetros para rotas
+    @app.route('/api/<int:id>', methods=['GET', 'POST'])
+    def api(id=None):  # Parâmetro opcional
+        url = 'http://makeup-api.herokuapp.com/'
+        response = urllib.request.urlopen(url)
+        data = response.read()
+        productsList = json.loads(data)
+        # Vereficando se o parâmetro foi enviado
+        if id:
+            divulgacao = []
+            for product in productsList:
+                if product['id'] == id:  # Comparando os IDs
+                    divulgacao = product
+                    break
+            if divulgacao:
+                return render_template('divulgacao.html', divulgacao=divulgacao)
+            else:
+                return f'Game com a ID {id} não foi encontrado.'
+        else:
+            return render_template('api.html', productsList=productsList)
+
 
 
