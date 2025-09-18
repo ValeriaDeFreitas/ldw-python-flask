@@ -60,19 +60,19 @@ def init_app(app):
     # Criando parâmetros para rotas
     @app.route('/api/<int:id>', methods=['GET', 'POST'])
     def api(id=None):  # Parâmetro opcional
-        url = 'http://makeup-api.herokuapp.com/'
+        url = 'http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline'
         response = urllib.request.urlopen(url)
         data = response.read()
         productsList = json.loads(data)
         # Vereficando se o parâmetro foi enviado
         if id:
-            divulgacao = []
+            Info = []
             for product in productsList:
                 if product['id'] == id:  # Comparando os IDs
-                    divulgacao = product
+                    Info = product
                     break
-            if divulgacao:
-                return render_template('divulgacao.html', divulgacao=divulgacao)
+            if Info:
+                return render_template('Info.html', Info=Info)
             else:
                 return f'Game com a ID {id} não foi encontrado.'
         else:
