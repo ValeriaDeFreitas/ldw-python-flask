@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+  <div class="col-md-6 m-auto">
+    <h3 style="text-align: center;">Editar Produto</h3><br>
+    
+    <div class="card" id="form-bg">
+      <form action="{{ url_for('produto_editar', id=produto.id) }}" method="POST" class="p-4">
+        
+        <div class="mb-3">
+          <label for="name" class="form-label">Nome:</label>
+          <input type="text" name="name" class="form-control" value="{{ produto.name }}" required>
+        </div>
+        
+        <div class="mb-3">
+          <label for="year" class="form-label">Ano:</label>
+          <input type="number" name="year" class="form-control" value="{{ produto.year }}" required>
+        </div>
+        
+        <div class="mb-3">
+          <label for="categoria_id" class="form-label">Categoria:</label>
+          <select name="categoria_id" class="form-control">
+            <option value="">Sem categoria</option>
+            {% for cat in categorias %}
+            <option value="{{ cat.id }}" {% if produto.categoria_id == cat.id %}selected{% endif %}>
+              {{ cat.nome }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+        
+        <div class="mb-3">
+          <label for="description" class="form-label">Descrição:</label>
+          <textarea name="description" class="form-control" rows="4" required>{{ produto.description }}</textarea>
+        </div>
+        
+        <button type="submit" class="btn" id="save" onclick="return confirm('Confirma as alterações?')">
+          Salvar Alterações
+        </button>
+        <a href="{{ url_for('cadastro') }}" class="btn btn-secondary" id="cancel">Cancelar</a>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

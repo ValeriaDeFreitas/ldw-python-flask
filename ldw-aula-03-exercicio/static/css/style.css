@@ -1,0 +1,94 @@
+
+/* Cores  */
+:root {
+  --color-one: #9376e0;
+  --color-two: #e893cf;
+  --color-three: #f3bcc8;
+  --color-four: #f6ffa6;
+  --color-one-pastel: #E3DEF0;
+  --color-two-pastel: #F7D1D9;
+  --color-three-pastel: #F7D1D9;
+  --color-four-pastel: #FFFFD1;
+}
+/* Geral */
+.body {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal
+}
+.bg {
+  background-color: #ffffff;
+  height: max-content;
+}
+/* Inicio  */
+.image {
+  width: 99.2vw;
+}
+.img-fluid {
+  width: 99vw;
+  height: 90px;
+}
+#logo {
+  position: relative;
+  width: 220px;
+  height: 170px;
+}
+#links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#link{
+  color: var(--color-one);
+}
+#card-img{
+  width: 300px;
+  padding-top: 2%;
+  background-color: var(--color-four-pastel);
+}
+#card-pt{
+  background-color: var(--color-one-pastel);
+  border-radius: 20px;
+}
+#button{
+  background-color: var(--color-one);
+  color: #ffffff;
+}
+#input{
+  width: 600px;
+}
+#form-bg{
+  background-color: var(--color-one-pastel);
+  color: #000000;
+  width: 1000px;
+  margin-bottom: 10%;
+  display: flex;
+  justify-self: center;
+  padding: 3%;
+}
+#save{
+ background-color: var(--color-four);
+}
+#cancel{
+ background-color: var(--color-two-pastel);
+ color: #000000;
+}
+#edit{
+ background-color: var(--color-four-pastel);
+ color: #000000;
+}
+#delete{
+ background-color: var(--color-one);
+ color: #fff;
+}
+#tb{
+  background-color: var(--color-three);
+}
+@media (min-width: 768px) {
+  #nav-conteiner {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+  }
+}

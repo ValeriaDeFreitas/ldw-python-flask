@@ -1,0 +1,74 @@
+{% extends 'base.html' %} {% block content %}
+<wrapper class="bg">
+  <main class="main" id="main-cadastro">
+    <h3 style="text-align: center; margin-bottom: 5%">
+      Bem-vindo à Lumina Care, a marca número um do mercado
+    </h3>
+    <h4 style="text-align: center; margin-bottom: 2%">Sobre a Lumina Care</h4>
+    <p class="text text-center text-break">
+      Há 4 anos, nasceu a Lumina Care, uma marca dedicada a oferecer produtos de
+      alta qualidade para cuidados pessoais. Nossa missão é proporcionar
+      bem-estar e confiança aos nossos clientes, oferecendo soluções inovadoras
+      e eficazes para o cuidado diário. Com uma equipe apaixonada e
+      comprometida, trabalhamos incansavelmente para desenvolver produtos que
+      atendam às necessidades e expectativas de nossos consumidores. Na Lumina
+      Care, acreditamos que o cuidado pessoal é essencial para uma vida saudável
+      e feliz, e estamos aqui para ajudar você a alcançar esse objetivo.
+    </p>
+
+    <h4 style="text-align: center;">Destaques:</h4>
+
+    <div class="d-flex flex-wrap justify-content-between">
+      {% for produto in produtos %}
+      <div class="card mx-3 mb-4" id="card-img">
+        <div class="image-card pb-3 text-center">
+          <img
+            src="{{ url_for('static', filename='images/' ~ produto.image) }}"
+            alt="Imagem de {{ produto.name }}"
+            width="200"
+          />
+        </div>
+        <p style="text-align: start;" class="mx-5">
+          <label>Nome: <strong>{{ produto.name }}</strong></label>
+          <label>Ano de Fabricação: <strong>{{ produto.year }}</strong></label>
+          <label>Descrição: <strong>{{ produto.description }}</strong></label>
+        </p>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="card mx-3 mt-5" id="card-pt">
+
+    <h3 class="mx-5 mt-3">Patrocinadores:</h3>
+    <ul class="mx-5">
+      {% for patrocinador in patrocinadores %}
+      <li>{{ patrocinador }}</li>
+      {% endfor %}
+    </ul>
+    <hr />
+
+    <form
+      action="{{ url_for('divulgacao') }}"
+      method="POST"
+      class="d-flex justify-content-start"
+    >
+      <label for="patrocinadores" class="mb-5 ms-5"
+        >Cadastrar novos Patrocinadores:</label
+      >
+      <input
+        type="text"
+        name="patrocinadores"
+        class="form-control mt-5 mb-5"
+        id="input"
+      />
+      <input
+        type="submit"
+        value="Cadastrar"
+        class="btn mt-5 mb-5"
+        id="button"
+      /></div>
+      
+    </form>
+  </main>
+</wrapper>
+{% endblock content %}

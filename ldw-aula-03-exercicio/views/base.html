@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumina</title>
+    
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+<body class="body">
+    <header>
+        <h1 style="text-align: center;">Lumina</h1>
+    </header>
+    <ul class="nav" id="nav-conteiner">
+      <li class="nav-item">
+        <a href="/">
+          <img src="{{ url_for('static', filename='images/img3.png') }}" class="img-fluid pe-5" id="logo" alt="Logo Lumina" />
+        </a>
+      </li>
+      <div id="links">
+        <li class="nav-item">
+          <a class="nav-link" id="link" href="/divulgacao">Divulgação</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="link" href="{{url_for('cadastro')}}">Produtos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="link" href="{{url_for('categorias')}}">Categorias</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="link" href="{{url_for('clientes')}}">Clientes</a>
+        </li>
+      </div>
+    </ul>
+    
+    <div class="container mt-4">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+    </div>
+    
+    {% block content %}
+    {% endblock content %}
+    
+    <footer class="mt-5">
+        <h3 style="text-align: center;">Todos os direitos reservados &reg;</h3>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

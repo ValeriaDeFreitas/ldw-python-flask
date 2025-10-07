@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+<h5 style="text-align: center;">Cadastrar Nova Categoria</h5>
+
+    <div class="card" id="form-bg" style="color: black;">
+        <div class="card-body">
+            <form action="{{ url_for('categorias') }}" method="POST">
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome:</label>
+                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome da categoria" required>
+                </div>
+                <div class="mb-3">
+                    <label for="descricao" class="form-label">Descrição:</label>
+                    <textarea class="form-control" id="descricao" name="descricao" rows="2"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" id="button">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+
+    <hr>
+
+    <h4 class="mt-5">Categorias Cadastradas</h4>
+    <table class="table table-striped table-hover mt-3">
+        <thead class="table-black">
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th style="width: 150px;">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for categoria in categorias.items %}
+            <tr>
+                <td>{{ categoria.id }}</td>
+                <td>{{ categoria.nome }}</td>
+                <td>{{ categoria.descricao }}</td>
+                <td>
+                    <a href="{{ url_for('categoria_editar', id=categoria.id) }}" class="btn btn-sm" id="edit">Editar</a>
+                    <a href="{{ url_for('categoria_excluir', id=categoria.id) }}" class="btn btn-sm" id="delete" onclick="return confirm('Deseja realmente excluir?')">Excluir</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <nav>
+        <ul class="pagination justify-content-center">
+            {% if categorias.has_prev %}
+                <li class="page-item"><a class="page-link" href="{{ url_for('categorias', page=categorias.prev_num) }}">Anterior</a></li>
+            {% endif %}
+            {% for page_num in categorias.iter_pages() %}
+                <li class="page-item {% if categorias.page == page_num %}active{% endif %}">
+                    <a class="page-link" href="{{ url_for('categorias', page=page_num) }}">{{ page_num }}</a>
+                </li>
+            {% endfor %}
+            {% if categorias.has_next %}
+                <li class="page-item"><a class="page-link" href="{{ url_for('categorias', page=categorias.next_num) }}">Próxima</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endblock content %}

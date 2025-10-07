@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+<h5 style="text-align: center;" >Cadastrar Novo Cliente</h5>
+    <div class="card" id="form-bg" style="color: black;">
+        <div class="card-body">
+            <form action="{{ url_for('clientes') }}" method="POST">
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome Completo:</label>
+                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome do cliente" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="exemplo@email.com" required>
+                </div>
+                <div class="mb-3">
+                    <label for="telefone" class="form-label">Telefone (Opcional):</label>
+                    <input type="text" class="form-control" id="telefone" name="telefone" placeholder="(XX) XXXXX-XXXX">
+                </div>
+                <button type="submit" class="btn btn-primary" id="button">Cadastrar Cliente</button>
+            </form>
+        </div>
+    </div>
+
+    <hr>
+
+    <h4 class="mt-5">Clientes Cadastrados</h4>
+    <table class="table table-striped table-hover mt-3">
+        <thead class="table-black">
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th style="width: 150px;">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in clientes.items %}
+            <tr>
+                <td>{{ cliente.id }}</td>
+                <td>{{ cliente.nome }}</td>
+                <td>{{ cliente.email }}</td>
+                <td>{{ cliente.telefone or 'Não informado' }}</td>
+                <td>
+                    <a href="{{ url_for('cliente_editar', id=cliente.id) }}" class="btn btn-sm" id="edit">Editar</a>
+                    <a href="{{ url_for('cliente_excluir', id=cliente.id) }}" class="btn btn-sm" id="delete" onclick="return confirm('Tem certeza que deseja excluir este cliente?')">Excluir</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <nav>
+        <ul class="pagination justify-content-center">
+            {% if clientes.has_prev %}
+                <li class="page-item"><a class="page-link" href="{{ url_for('clientes', page=clientes.prev_num) }}">Anterior</a></li>
+            {% endif %}
+            {% for page_num in clientes.iter_pages() %}
+                <li class="page-item {% if clientes.page == page_num %}active{% endif %}">
+                    <a class="page-link" href="{{ url_for('clientes', page=page_num) }}">{{ page_num }}</a>
+                </li>
+            {% endfor %}
+            {% if clientes.has_next %}
+                <li class="page-item"><a class="page-link" href="{{ url_for('clientes', page=clientes.next_num) }}">Próxima</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endblock content %}

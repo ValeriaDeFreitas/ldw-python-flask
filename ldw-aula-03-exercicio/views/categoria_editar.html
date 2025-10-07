@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+  <div class="col-md-6 m-auto">
+    <h3 style="text-align: center;">Editar Categoria</h3><br>
+    
+    <div class="card" id="form-bg" style="color: black;">
+      <form action="{{ url_for('categoria_editar', id=categoria.id) }}" method="POST" class="p-4">
+        
+        <div class="mb-3">
+          <label for="nome" class="form-label">Nome:</label>
+          <input type="text" name="nome" class="form-control" value="{{ categoria.nome }}" required>
+        </div>
+        
+        <div class="mb-3">
+          <label for="descricao" class="form-label">Descrição:</label>
+          <textarea name="descricao" class="form-control" rows="3">{{ categoria.descricao }}</textarea>
+        </div>
+        
+        <button type="submit" class="btn" id="save" onclick="return confirm('Confirmar alterações?')">
+          Salvar
+        </button>
+        <a href="{{ url_for('categorias') }}" class="btn" id="cancel">Cancelar</a>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

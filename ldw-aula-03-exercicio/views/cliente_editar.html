@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+  <div class="col-md-6 m-auto">
+    <h3 style="text-align: center;">Editar Cliente</h3>
+    <br>
+    <div class="card" id="form-bg" style="color: black;">
+      <form action="{{ url_for('cliente_editar', id=cliente.id) }}" method="POST" class="p-4">
+        
+        <div class="mb-3">
+          <label for="nome" class="form-label">Nome Completo:</label>
+          <input type="text" name="nome" class="form-control" value="{{ cliente.nome }}" required>
+        </div>
+        
+        <div class="mb-3">
+          <label for="email" class="form-label">Email:</label>
+          <input type="email" name="email" class="form-control" value="{{ cliente.email }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="telefone" class="form-label">Telefone (Opcional):</label>
+            <input type="text" name="telefone" class="form-control" value="{{ cliente.telefone or '' }}">
+        </div>
+        
+        <button type="submit" class="btn" id="save" onclick="return confirm('Confirmar alterações?')">
+          Salvar Alterações
+        </button>
+        <a href="{{ url_for('clientes') }}" class="btn" id="cancel">Cancelar</a>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}
